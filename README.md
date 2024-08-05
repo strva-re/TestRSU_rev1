@@ -1,7 +1,7 @@
 # TestRSU_rev1.cde
 
 Я не углублялся слишком сильно в решение проблемы. Думал, как можно сделать проще и быстрее. Самое банальное – это отреверсить систему уже имеющихся логов.
-![1](https://github.com/user-attachments/assets/f9cd2ebb-c6c8-4805-bee2-4d16ba03dcda)
+![1](https://github.com/user-attachments/assets/6f70eb95-099c-4225-8825-f00947913767)
 
 ## Шаги, которые я предпринял:
 
@@ -23,14 +23,15 @@
 
 5. **Поиск тринера 2**:
    - Обнаружил, что логика функции не выполнится, если не будет выполнено условие `*(_WORD *)(CWnd::GetCurrentMessage() + 8) != 0xE108`.
-    ![ida_sc](https://github.com/user-attachments/assets/eaf4f519-e473-4f64-a527-63de57f537c7)
+   ![ida_sc](https://github.com/user-attachments/assets/dc3f13ea-b1aa-48cb-b430-6fb271a81354)
+
    - Нашел, откуда и как устанавливается триггер, воспроизвел его.
-    ![ida_sc_2](https://github.com/user-attachments/assets/8ddfc542-f26a-4b66-98a1-fa91f590dc15)
+   ![ida_sc_2](https://github.com/user-attachments/assets/624fe068-6ef3-4009-b747-30f20a0dc410)
 
 ## Моя идея:
 
 Перенаправить печать с принтера на встроенный Microsoft Print to PDF, который сохраняет все прямо в файл. Для этого нужно хукнуть функцию `StartDocW` и добавить туда путь к файлу `lpdi->lpszOutput`.
-![hook](https://github.com/user-attachments/assets/c233b331-1644-401b-8fb4-fffe0f1acb9e)
+![hook](https://github.com/user-attachments/assets/9c223e38-f7ab-4d21-ad8a-3f16225e97d9)
 
 ## Ну и сам процесс:
 
